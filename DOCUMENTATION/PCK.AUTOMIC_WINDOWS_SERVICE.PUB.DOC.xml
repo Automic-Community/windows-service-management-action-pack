@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<DOCU name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.DOC">
+<HEADER state="1">
+<Title/>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<DOCU_Docu state="1" type="text">
+<DOC><![CDATA[Use the actions to manipulate (start, stop, create, etc.) Windows services. 
+
+=Supported Platforms=
+
+* Windows Server 2003
+* Windows Server 2008
+* Windows Server 2008 R2
+
+=Rollback=
+
+The Windows Service Management actions do not support rollbacks yet.
+]]></DOC>
+</DOCU_Docu>
+</DOCU>
+</uc-export>
