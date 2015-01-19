@@ -8,18 +8,14 @@
 <OH_SubType/>
 </HEADER>
 <DOCU_Docu state="1" type="text">
-<DOC><![CDATA[Use the actions to manipulate (start, stop, create, etc.) Windows services. 
+<DOC><![CDATA[Contains actions to manipulate Windows services.
 
-=Supported Platforms=
+# Supported Platforms
 
-* Windows Server 2003
-* Windows Server 2008
-* Windows Server 2008 R2
-
-=Rollback=
-
-The Windows Service Management actions do not support rollbacks yet.
-]]></DOC>
+- Windows Server 2003
+- Windows Server 2008
+- Windows Server 2008 R2]]>
+</DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>
