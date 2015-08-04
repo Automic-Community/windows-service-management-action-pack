@@ -1,0 +1,2 @@
+*** Settings ***
+Force Tags        win    pck.automic_windows_service

@@ -1,0 +1,58 @@
+*** Settings ***
+Suite Setup       Suite Setup
+Force Tags        change display name
+Test Template     Change Display Name Template
+Resource          ../../resources/keywords.txt
+
+*** Variables ***
+${working_dir}    ${_FILE_WORKING_DIR}\\FileCommand\\WindowsServiceManager\\ServiceManager\\windows\\x64
+AYED NAME 1       DISPLAYED NAME 2    RET
+
+*** Test Cases ***    SERVICE NAME 1        SERVICE NAME 2        SERVICE PATH    SERVICE TYPE    DISPLAY NAME 1        DISPLAY NAME 2                RETURN STATUS                MESSAGE
+Change Display Name Normal
+                      UC4.TestService.01    UC4.TestService.02    UCYBSMgr.exe    own             UC4.TestService.01    UC4.TestService.01.Changed    ${ENDED_NOT_OK - aborted}    ${ServiceNameOrServiceDisplayeNameAlreadyExist}
+
+*** Keywords ***
+Suite Setup
+    Init AE And Package
+    Init Win File Server
+
+Change Display Name Template
+    [Arguments]    ${serviceName1}    ${serviceName2}    ${servicePath}    ${serviceType}    ${serviceDisplayedName1}    ${serviceDisplayedName2}
+    ...    ${returnStatus}    ${message}
+    Init Action    ${ACTION_STOP_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName1}
+    Action Execute
+    Init Action    ${ACTION_DELETE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName1}
+    Action Execute
+    Init Action    ${ACTION_STOP_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName1}
+    Action Execute
+    Init Action    ${ACTION_DELETE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName2}
+    Action Execute
+    Init Action    ${ACTION_CREATE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName1}
+    Action Set    ${PROMPTSET_SERVICE_PATH}    ${working_dir}${/}${servicePath}
+    Action Set    ${PROMPTSET_SERVICE_TYPE}    ${serviceType}
+    Action Set    ${PROMPTSET_SERVICE_DISPLAY_NAME}    ${serviceDisplayedName1}
+    Action Execute
+    Init Action    ${ACTION_CREATE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName2}
+    Action Set    ${PROMPTSET_SERVICE_PATH}    ${working_dir}${/}${servicePath}
+    Action Set    ${PROMPTSET_SERVICE_TYPE}    ${serviceType}
+    Action Set    ${PROMPTSET_SERVICE_DISPLAY_NAME}    ${serviceDisplayedName2}
+    Action Execute
+    Init Action    ${ACTION_CHANGE_DISPLAY_NAME}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName2}
+    Action Set    ${PROMPTSET_SERVICE_DISPLAY_NAME}    ${serviceDisplayedName1}
+    Action Execute
+    Action Report Should Be Found
+    Action Return Status Should Be    ${returnStatus}
+    Action Report Should Contain    ${message}
+    Action Report Should Contain    START AT
+    #    Action Report Should Contain    PARAMETER VALIDATION START
+    #    Action Report Should Contain    EXECUTION START
+    #    Action Report Should Contain    ABEND AT
+    #    Action Report Should Contain    RET-CODE

@@ -1,0 +1,22 @@
+*** Variables ***
+#---- Message ---------------------
+${MessageStartOk}    Start tomcat ok
+${MessageAlreadyRunning}    Tomcat already running
+${CreateServiceSuccess}    CreateService SUCCESS
+${DeletePausedService}    The specified service has been marked for deletion.
+${SERVICE_NAME}    SERVICE_NAME
+${TYPE}           TYPE
+${WIN32_EXIT_CODE}    WIN32_EXIT_CODE
+${SERVICE_EXIT_CODE}    SERVICE_EXIT_CODE
+${CHECKPOINT}     CHECKPOINT
+${WAIT_HINT}      WAIT_HINT
+${STATE_4_RUNNING}    STATE \ \ \ \ \ \ \ \ \ \ \ \ \ : 4 \ RUNNING
+${STATE_7_PAUSE}    STATE \ \ \ \ \ \ \ \ \ \ \ \ \ : 7 \ PAUSED
+${ServiceHasNotBeenStarted}    The service has not been started.
+${STATE_1_STOP}    STATE \ \ \ \ \ \ \ \ \ \ \ \ \ : 1 \ STOPPED
+${InvalidUser}    The account name is invalid or does not exist, or the password is invalid for the account name specified.
+${ServiceNameOrServiceDisplayeNameAlreadyExist}    The name is already in use as either a service name or a service display name.
+${ServiceIsNotInStoppedState.CannotStart}    not in a STOPPED state. Won't issue a start
+#---- AE status ---------------------
+${ENDED_OK - ended normally}    ENDED_OK - ended normally
+${ENDED_NOT_OK - aborted}    ENDED_NOT_OK - aborted

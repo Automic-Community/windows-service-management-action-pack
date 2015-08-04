@@ -1,0 +1,44 @@
+*** Settings ***
+Documentation     This is high level keywords that will be used by local test cases
+Resource          context.txt
+Resource          messages.txt
+Resource          actions.txt
+
+*** Key Words ***
+Init Action
+    [Arguments]    ${actionName}
+    Action Create    ${actionName}
+    Action Set    &AGENT#    ${_FILE_AGENT}
+    Action Set    &LOGIN#    ${_FILE_LOGIN}
+
+Check Tomcat Management UI Available
+    ${status}    Http Get Status    http://${_TOMCAT_HOST}:${_TOMCAT_PORT}
+    Should Be Equal As Integers    ${status}    200
+
+Action Report Should Contain
+    [Arguments]    ${text}
+    ${report} =    Action Get Report
+    Should Contain    ${report}    ${text}
+
+Action Report Should Be Found
+    ${report} =    Action Get Report
+    Should Not Be Empty    ${report}
+
+Action Report Should Not Be Found
+    ${report} =    Action Get Report
+    Should Be Empty    ${report}
+
+Action Return Code Should Be
+    [Arguments]    ${code}
+    ${returnCode}=    Action Get Variable    Return code
+    Should Be Equal    ${returnCode}    ${code}
+
+Action Return Code Should Not Equal
+    [Arguments]    ${code}
+    ${returnCode}=    Action Get Variable    Return code
+    Should Not Be Equal    ${returnCode}    ${code}
+
+Action Return Status Should Be
+    [Arguments]    ${status}
+    ${returnStatus}=    Action Get Variable    Status
+    Should Be Equal    ${returnStatus}    ${status}

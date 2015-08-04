@@ -1,0 +1,46 @@
+*** Settings ***
+Suite Setup       Suite Setup
+Force Tags        pause service
+Test Template     Pause Service Template
+Resource          ../../resources/keywords.txt
+
+*** Variables ***
+${working_dir}    ${_FILE_WORKING_DIR}${/}FileCommand${/}TestWindowsService
+
+*** Test Cases ***    SERVICE NAME                      SERVICE PATH      SERVICE TYPE    DISPLAY NAME                      RETURN CODE    RETURN STATUS
+Service Already Exists
+                      UC4.TestWindowsService.Paused3    DhmService.exe    own             UC4.TestWindowsService.Paused3    0              ${ENDED_OK - ended normally}
+
+*** Keywords ***
+Suite Setup
+    Init AE And Package
+    Init Win File Server
+
+Pause Service Template
+    [Arguments]    ${serviceName}    ${servicePath}    ${serviceType}    ${serviceDisplayedName}    ${returnCode}    ${returnStatus}
+    Init Action    ${ACTION_DELETE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    Init Action    ${ACTION_CREATE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Set    ${PROMPTSET_SERVICE_PATH}    ${working_dir}${/}${servicePath}
+    Action Set    ${PROMPTSET_SERVICE_TYPE}    ${serviceType}
+    Action Set    ${PROMPTSET_SERVICE_DISPLAY_NAME}    ${serviceDisplayedName}
+    Action Execute
+    Init Action    ${ACTION_START_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    Init Action    ${ACTION_PAUSE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    Init Action    ${ACTION_PAUSE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    Action Report Should Be Found
+    Action Return Code Should Be    ${returnCode}
+    Action Return Status Should Be    ${returnStatus}
+    Action Report Should Contain    START AT
+    #    Action Report Should Contain    PARAMETER VALIDATION START
+    #    Action Report Should Contain    EXECUTION START
+    #    Action Report Should Contain    ABEND AT
+    #    Action Report Should Contain    RET-CODE

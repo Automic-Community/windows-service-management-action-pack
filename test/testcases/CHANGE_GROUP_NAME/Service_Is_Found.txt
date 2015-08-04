@@ -1,0 +1,44 @@
+*** Settings ***
+Suite Setup       Suite Setup
+Force Tags        change group name
+Test Template     Change Group Name Template
+Resource          ../../resources/keywords.txt
+
+*** Variables ***
+${working_dir}    ${_FILE_WORKING_DIR}\\FileCommand\\WindowsServiceManager\\ServiceManager\\windows\\x64
+
+*** Test Cases ***    SERVICE NAME       SERVICE PATH    SERVICE TYPE    DISPLAYED NAME     GROUP NAME             RETURN CODE    RETURN STATUS
+Input Empty Group Name
+                      UC4.TestService    UCYBSMgr.exe    filesys         UC4.TestService    \                      0              ${ENDED_OK - ended normally}
+
+Normal Group Name     UC4.TestService    UCYBSMgr.exe    filesys         UC4.TestService    GRP_UC4.TestService    0              ${ENDED_OK - ended normally}
+
+*** Keywords ***
+Suite Setup
+    Init AE And Package
+    Init Win File Server
+
+Change Group Name Template
+    [Arguments]    ${serviceName}    ${servicePath}    ${serviceType}    ${serviceDisplayedName}    ${groupName}    ${returnCode}
+    ...    ${returnStatus}
+    Init Action    ${ACTION_DELETE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    Init Action    ${ACTION_CREATE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Set    ${PROMPTSET_SERVICE_PATH}    ${working_dir}${/}${servicePath}
+    Action Set    ${PROMPTSET_SERVICE_TYPE}    ${serviceType}
+    Action Set    ${PROMPTSET_SERVICE_DISPLAY_NAME}    ${serviceDisplayedName}
+    Action Execute
+    Init Action    ${ACTION_CHANGE_GROUP_NAME}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Set    ${PROMPTSET_SERVICE_GROUP_NAME}    ${groupName}
+    Action Execute
+    Action Report Should Be Found
+    Action Return Code Should Be    ${returnCode}
+    Action Return Status Should Be    ${returnStatus}
+    Action Report Should Contain    START AT
+    #    Action Report Should Contain    PARAMETER VALIDATION START
+    #    Action Report Should Contain    EXECUTION START
+    #    Action Report Should Contain    ABEND AT
+    #    Action Report Should Contain    RET-CODE

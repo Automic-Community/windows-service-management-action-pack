@@ -1,0 +1,35 @@
+*** Settings ***
+Suite Setup       Suite Setup
+Force Tags        change startup type
+Test Template     Create Service Template
+Resource          ../../resources/keywords.txt
+
+*** Variables ***
+${working_dir}    ${_FILE_WORKING_DIR}\\FileCommand\\WindowsServiceManager\\ServiceManager\\windows\\x64
+
+*** Test Cases ***    SERVICE NAME       STARTUP TYPE    RETURN CODE    RETURN STATUS
+Service Does Not Found
+                      UC4.TestService    auto            1              ${ENDED_NOT_OK - aborted}
+
+*** Keywords ***
+Suite Setup
+    Init AE And Package
+    Init Win File Server
+
+Create Service Template
+    [Arguments]    ${serviceName}    ${errorLevel}    ${returnCode}    ${returnStatus}
+    Init Action    ${ACTION_DELETE_SERVICE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    Init Action    ${ACTION_CHANGE_STARTUP_TYPE}
+    Action Set    ${PROMPTSET_SERVICE_NAME}    ${serviceName}
+    Action Set    ${PROMPTSET_SERVICE_STARTUP_TYPE}    ${errorLevel}    #auto | delayed-auto | demand | disable
+    Action Execute
+    Action Report Should Be Found
+    Action Return Code Should Be    ${returnCode}
+    Action Return Status Should Be    ${returnStatus}
+    Action Report Should Contain    START AT
+    #    Action Report Should Contain    PARAMETER VALIDATION START
+    #    Action Report Should Contain    EXECUTION START
+    #    Action Report Should Contain    ABEND AT
+    #    Action Report Should Contain    RET-CODE
