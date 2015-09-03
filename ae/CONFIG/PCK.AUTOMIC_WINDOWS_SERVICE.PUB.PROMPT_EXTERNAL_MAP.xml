@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.PROMPT_EXTERNAL_MAP" replacementmode="2">
+<HEADER state="1">
+<Title/>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType>STATIC</OH_SubType>
+</HEADER>
+<ATTR_VARA state="1">
+<Type>C|Text</Type>
+<lblSource>Static</lblSource>
+<source>STATIC</source>
+<VRName>FREI|Freely selected</VRName>
+<NotFoundErr>0</NotFoundErr>
+<NotFoundDef>1</NotFoundDef>
+<ShareN>0</ShareN>
+<ShareL>0</ShareL>
+<ShareR>0</ShareR>
+<MaxValue_C>1024</MaxValue_C>
+<CheckMax_C>0</CheckMax_C>
+<uppercase>0</uppercase>
+<sortColumn>0</sortColumn>
+<sortDirection>0</sortDirection>
+</ATTR_VARA>
+<VARA state="1">
+<Variables>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_ACCOUNT/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_ACCOUNT/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_DEPENDENCIES/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_DEPENDENCIES/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_DESCRIPTION/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_DESCRIPTION/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_DISPLAY_NAME/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_DISPLAY_NAME/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_ERROR_SEVERITY/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_ERROR_SEVERITY/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_GROUP_NAME/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_GROUP_NAME/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_PASSWORD/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_PASSWORD/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_PATH/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_PATH/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_STARTUP_TYPE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_STARTUP_TYPE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_TYPE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHANGE_TYPE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHECK_SERVICE_EXISTS/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CHECK_SERVICE_EXISTS/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CONTINUE_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CONTINUE_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CONTROL_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CONTROL_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CREATE_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CREATE_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CREATE_SNAPSHOT/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.CREATE_SNAPSHOT/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.DELETE_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.DELETE_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.GET_SERVICE_STATE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.GET_SERVICE_STATE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.INTERROGATE_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.INTERROGATE_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.PAUSE_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.PAUSE_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.START_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.START_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.STOP_SERVICE/AGENT#" Value="&amp;AGENT#" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.STOP_SERVICE/LOGIN#" Value="&amp;LOGIN#" Value1="" Value2="" Value3="" Value4=""/>
+</Variables>
+</VARA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</VARA>
+</uc-export>
