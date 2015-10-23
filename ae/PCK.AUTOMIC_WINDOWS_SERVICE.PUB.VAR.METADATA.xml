@@ -27,9 +27,9 @@
 <row Name="Categories" Value="OS, WIN" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Company" Value="Automic Software GmbH" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Dependencies" Value="PCK.ITPA_SHARED ~&gt; 1.1" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Description" Value="Manipulate (start, stop, create, etc.) Windows services.&#10; &#10;=Supported Platforms=&#10; &#10;* Windows Server 2003&#10;* Windows Server 2008&#10;* Windows Server 2008 R2" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="Description" Value="Manipulate (start, stop, create, etc.) Windows services." Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Homepage" Value="www.automic.com" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="License" Value="Comercial" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="License" Value="Commercial" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Name" Value="PCK.AUTOMIC_WINDOWS_SERVICE" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Package Format Version" Value="0.1.0" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Title" Value="Automic Windows Service" Value1="" Value2="" Value3="" Value4=""/>

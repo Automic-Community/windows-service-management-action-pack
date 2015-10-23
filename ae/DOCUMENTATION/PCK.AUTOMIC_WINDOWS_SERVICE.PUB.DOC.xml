@@ -9,11 +9,9 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[Contains actions to manipulate Windows services.
 
-# Supported Platforms
+=Supported versions=
 
-- Windows Server 2003
-- Windows Server 2008
-- Windows Server 2008 R2
+See http://docs.automic.com/compatibility?len=Package.Windows.Service&comp=PCK.AUTOMIC_WINDOWS_SERVICE&version=1.1.0
 ]]></DOC>
 </DOCU_Docu>
 </DOCU>
