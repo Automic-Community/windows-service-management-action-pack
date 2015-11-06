@@ -42,3 +42,55 @@ Action Return Status Should Be
     [Arguments]    ${status}
     ${returnStatus}=    Action Get Variable    Status
     Should Be Equal    ${returnStatus}    ${status}
+
+Common testsuites execute and assert
+    [Arguments]    ${returnStatus}    ${returnCode}
+    Action Execute
+    Action Return Status Should Be    ${returnStatus}
+    #Run Keyword If    '${returnStatus}' == '${ENDED_OK}'    Action Report Should Be Found
+    #Run Keyword If    '${returnStatus}' == '${ENDED_OK}'    Assert Pass
+    #Action Return Code Should Be    ${returnCode}
+
+Common testsuites execute and assert fail
+    [Arguments]    ${returnStatus}    ${returnCode}
+    Action Execute
+    Should Not Be Equal    ${returnStatus}    ${ENDED_OK}
+
+Init Application Workflow
+    [Arguments]    ${action_name}
+    Action Create With File    ${action_name}    ${_TEMPLATE_DESCRIPTOR}
+    @{config}=    Create List    ${_MOCKUP_URL}    anything    anything    ${_FILE_AGENT}    ${_FILE_LOGIN}
+    Deployment Config    @{config}
+    Add Common essential variable
+
+Add Common essential variable
+    Add Custom Variable    @target/system/agent    ${_FILE_AGENT}
+    Add Custom Variable    @global/login    ${_FILE_LOGIN}
+    Add Custom Variable    /system/id    123456
+    Add Custom Variable    @deployment_package/system/id    123456
+    Add Custom Variable    @target/system/id    123456
+    Add Custom Variable    @snapshot/snapshotType    ${_SNAPSHOT_TYPE}
+    Add Custom Variable    @snapshot/reportId    123456789
+    Add Custom Variable    agent    ${_FILE_AGENT}
+
+Snapshot Suite Setup
+    Init AE And Package
+    Set Global Variable    ${_TEMPLATE_DESCRIPTOR}    ${_FILE_WORKING_DIR}${/}valid.txt
+
+Create Test Snapshot
+    Init Application Workflow    ${ACTION_SNAPSHOT_CREATE}
+    Action Set    ${PROMPTSET_SERVICE_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    ${archive_path}=    Action Get Variable    &UC4RB_SNAPSHOT_ARCHIVE#
+    ${guid}=    Action Get Variable    &UC4RB_OUT_TARGET_GUID#
+    @{return}=    Create List    ${archive_path}    ${guid}
+    [Return]    @{return}
+
+Clean Snapshot
+    [Arguments]    ${archive_path}    ${guid}
+    Init Application Workflow    ${ACTION_SNAPSHOT_DELETE}
+    Add Custom Variable    @snapshot/variables/archivepath    ${archive_path}
+    Add Custom Variable    @snapshot/guid    ${guid}
+    Add Custom Variable    @snapshot/snapshotType    PCK.AUTOMIC_WINDOWS_SERVICE
+    Action Execute
+    Action Report Should Be Found
