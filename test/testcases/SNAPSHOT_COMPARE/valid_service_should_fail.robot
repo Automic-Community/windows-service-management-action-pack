@@ -1,9 +1,9 @@
 *** Settings ***
-Documentation     Test windows service create snapshot action with valid input
-...               Possible valid input follow Unix/Window folder name convention OR just is EMPTY value.
+Documentation     Test windows service compare snapshot action with invalid input
+...               Possible invalid input follow Unix/Window folder name convention OR just is EMPTY value.
 ...               Test case will using above values.
 Suite Setup       Snapshot Suite Setup
-Force Tags        SNAPSHOT_CREATE    unix55    unix60    unix70    win55    win60    win70
+Force Tags        SNAPSHOT_CREATE    win55    win60    win70
 Test Template     archive_path_invalid_should_fail
 Resource          ../../resources/keywords.txt
 Resource          shared_template.robot
