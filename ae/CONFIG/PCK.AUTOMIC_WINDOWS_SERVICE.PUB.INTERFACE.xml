@@ -25,7 +25,7 @@
 <VARA state="1">
 <XML>
 <Parameters>
-<row Name="interface" Value="&lt;interface&gt;&lt;snapshot type=&quot;PCK.AUTOMIC_WINDOWS_SERVICE&quot;&gt;&lt;hooks&gt;&lt;extend-hook name=&quot;PCK.AUTOMIC_BOND.PRV.COM.SNAPSHOT.COMPARE&quot;&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.SNAPSHOT_COMPARE&lt;/extend-hook&gt;&lt;extend-hook name=&quot;PCK.AUTOMIC_BOND.PRV.COM.SNAPSHOT.DELETE&quot;&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.SNAPSHOT_DELETE&lt;/extend-hook&gt;&lt;extend-hook name=&quot;PCK.AUTOMIC_BOND.PRV.SNAPSHOT.CREATE_LIVE&quot;&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.SNAPSHOT_CREATE_LIVE&lt;/extend-hook&gt;&lt;/hooks&gt;&lt;display-name&gt;Windows_Service&lt;/display-name&gt;&lt;in-contract&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.PROMPTSET.SNAPSHOT_LIVE&lt;/in-contract&gt;&lt;/snapshot&gt;&lt;/interface&gt;"/>
+<row Name="interface" Value="&lt;interface&gt;&lt;snapshot type=&quot;PCK.AUTOMIC_WINDOWS_SERVICE&quot;&gt;&lt;hooks&gt;&lt;extend-hook name=&quot;PCK.AUTOMIC_BOND.PRV.COM.SNAPSHOT.COMPARE&quot;&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.SNAPSHOT_COMPARE&lt;/extend-hook&gt;&lt;extend-hook name=&quot;PCK.AUTOMIC_BOND.PRV.COM.SNAPSHOT.DELETE&quot;&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.SNAPSHOT_DELETE&lt;/extend-hook&gt;&lt;extend-hook name=&quot;PCK.AUTOMIC_BOND.PRV.SNAPSHOT.CREATE_LIVE&quot;&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.ACTION.SNAPSHOT_CREATE_LIVE&lt;/extend-hook&gt;&lt;/hooks&gt;&lt;display-name&gt;Windows Service&lt;/display-name&gt;&lt;in-contract&gt;PCK.AUTOMIC_WINDOWS_SERVICE.PUB.PROMPTSET.SNAPSHOT_LIVE&lt;/in-contract&gt;&lt;/snapshot&gt;&lt;/interface&gt;"/>
 </Parameters>
 </XML>
 </VARA>
