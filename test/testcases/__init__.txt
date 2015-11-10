@@ -1,2 +1,4 @@
 *** Settings ***
+Suite Setup       Create Data Test
 Force Tags        win    pck.automic_windows_service
+Resource          ../resources/keywords.txt

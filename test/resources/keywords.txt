@@ -42,3 +42,86 @@ Action Return Status Should Be
     [Arguments]    ${status}
     ${returnStatus}=    Action Get Variable    Status
     Should Be Equal    ${returnStatus}    ${status}
+
+Common testsuites execute and assert
+    [Arguments]    ${returnStatus}    ${returnCode}
+    Action Execute
+    Action Return Status Should Be    ${returnStatus}
+    #Run Keyword If    '${returnStatus}' == '${ENDED_OK}'    Action Report Should Be Found
+    #Run Keyword If    '${returnStatus}' == '${ENDED_OK}'    Assert Pass
+    #Action Return Code Should Be    ${returnCode}
+
+Common testsuites execute and assert fail
+    [Arguments]    ${returnStatus}    ${returnCode}
+    Action Execute
+    Should Not Be Equal    ${returnStatus}    ${ENDED_OK}
+
+Init Application Workflow
+    [Arguments]    ${action_name}
+    Action Create With File    ${action_name}    ${_TEMPLATE_DESCRIPTOR}
+    @{config}=    Create List    ${_MOCKUP_URL}    anything    anything    ${_FILE_AGENT}    ${_FILE_LOGIN}
+    Deployment Config    @{config}
+    Add Common essential variable
+
+Add Common essential variable
+    Add Custom Variable    @target/system/agent    ${_FILE_AGENT}
+    Add Custom Variable    @global/login    ${_FILE_LOGIN}
+    Add Custom Variable    /system/id    123456
+    Add Custom Variable    @deployment_package/system/id    123456
+    Add Custom Variable    @target/system/id    123456
+    Add Custom Variable    @snapshot/snapshotType    ${_SNAPSHOT_TYPE}
+    Add Custom Variable    @snapshot/reportId    123456789
+    Add Custom Variable    agent    ${_FILE_AGENT}
+
+Snapshot Suite Setup
+    Init AE And Package
+    Set Global Variable    ${_TEMPLATE_DESCRIPTOR}    ${_FILE_WORKING_DIR}${/}valid.txt
+
+Create Test Snapshot
+    Init Application Workflow    ${ACTION_SNAPSHOT_CREATE}
+    Action Set    ${PROMPTSET_SERVICE_SERVICE_NAME}    ${serviceName}
+    Action Execute
+    ${archive_path}=    Action Get Variable    &UC4RB_SNAPSHOT_ARCHIVE#
+    ${guid}=    Action Get Variable    &UC4RB_OUT_TARGET_GUID#
+    @{return}=    Create List    ${archive_path}    ${guid}
+    [Return]    @{return}
+
+Clean Snapshot
+    [Arguments]    ${archive_path}    ${guid}
+    Init Application Workflow    ${ACTION_SNAPSHOT_DELETE}
+    Add Custom Variable    @snapshot/variables/archivepath    ${archive_path}
+    Add Custom Variable    @snapshot/guid    ${guid}
+    Add Custom Variable    @snapshot/snapshotType    PCK.AUTOMIC_WINDOWS_SERVICE
+    Action Execute
+    Action Report Should Be Found
+
+Create Data Test
+    Init File Server
+    Download datatest    /testdata/PCK.AUTOMIC_WINDOWS_SERVICE
+    Download datatest for robot    /testdata/PCK.AUTOMIC_WINDOWS_SERVICE
+
+Download datatest
+    [Arguments]    ${path}
+    Action Connect    ${_AE_HOST}    ${_AE_PORT}    ${_AE_USER}    ${_AE_PASS}    ${_AE_TEMP_FOLD}
+    Init Action    PCK.AUTOMIC_FTP.PUB.ACTION.GET
+    Action Set    &UC4RB_FTP_HOST#    vvni01
+    Action Set    &UC4RB_FTP_USER#    administrator
+    Action Set    &UC4RB_FTP_PWD#    S3rv3r@Aut
+    Action Set    &UC4RB_FTP_TGT_OVERWRITE#    YES
+    Action Set    &UC4RB_FTP_SOURCE_FILES#    ${path}
+    Action Set    &UC4RB_FTP_TGT_FILES_DIR#    ${_FILE_WORKING_DIR}
+    Action Set    &UC4RB_FTP_RECURSIVE_GET#    YES
+    Action Set    &UC4RB_FTP_PROTOCOL#    FTP
+    Action Set    &UC4RB_FTP_CONNECT_TIMEOUT#    5000
+    Action Set    &UC4RB_FTP_TR_MODE#    BINARY
+    Action Execute
+
+Download datatest for robot
+    [Arguments]    ${path}
+    ${DL_HOST}=    Set Variable    vvni01
+    ${DL_PORT}=    Set Variable    21
+    ${DL_USER}=    Set Variable    administrator
+    ${DL_PWD}=    Set Variable    S3rv3r@Aut
+    ${DL_SOURCE_FILES}=    Set Variable    ${path}
+    ${DL_TGT_FILES_DIR}=    Set Variable    ${_FILE_WORKING_DIR}
+    Ftp Download    ${DL_HOST}    ${DL_PORT}    ${DL_USER}    ${DL_PWD}    ${DL_SOURCE_FILES}    ${DL_TGT_FILES_DIR}
