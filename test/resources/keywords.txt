@@ -94,3 +94,34 @@ Clean Snapshot
     Add Custom Variable    @snapshot/snapshotType    PCK.AUTOMIC_WINDOWS_SERVICE
     Action Execute
     Action Report Should Be Found
+
+Create Data Test
+    Init File Server
+    Download datatest    /testdata/PCK.AUTOMIC_WINDOWS_SERVICE
+    Download datatest for robot    /testdata/PCK.AUTOMIC_WINDOWS_SERVICE
+
+Download datatest
+    [Arguments]    ${path}
+    Action Connect    ${_AE_HOST}    ${_AE_PORT}    ${_AE_USER}    ${_AE_PASS}    ${_AE_TEMP_FOLD}
+    Init Action    PCK.AUTOMIC_FTP.PUB.ACTION.GET
+    Action Set    &UC4RB_FTP_HOST#    vvni01
+    Action Set    &UC4RB_FTP_USER#    administrator
+    Action Set    &UC4RB_FTP_PWD#    S3rv3r@Aut
+    Action Set    &UC4RB_FTP_TGT_OVERWRITE#    YES
+    Action Set    &UC4RB_FTP_SOURCE_FILES#    ${path}
+    Action Set    &UC4RB_FTP_TGT_FILES_DIR#    ${_FILE_WORKING_DIR}
+    Action Set    &UC4RB_FTP_RECURSIVE_GET#    YES
+    Action Set    &UC4RB_FTP_PROTOCOL#    FTP
+    Action Set    &UC4RB_FTP_CONNECT_TIMEOUT#    5000
+    Action Set    &UC4RB_FTP_TR_MODE#    BINARY
+    Action Execute
+
+Download datatest for robot
+    [Arguments]    ${path}
+    ${DL_HOST}=    Set Variable    vvni01
+    ${DL_PORT}=    Set Variable    21
+    ${DL_USER}=    Set Variable    administrator
+    ${DL_PWD}=    Set Variable    S3rv3r@Aut
+    ${DL_SOURCE_FILES}=    Set Variable    ${path}
+    ${DL_TGT_FILES_DIR}=    Set Variable    ${_FILE_WORKING_DIR}
+    Ftp Download    ${DL_HOST}    ${DL_PORT}    ${DL_USER}    ${DL_PWD}    ${DL_SOURCE_FILES}    ${DL_TGT_FILES_DIR}
