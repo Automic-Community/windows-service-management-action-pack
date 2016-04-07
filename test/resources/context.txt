@@ -5,9 +5,9 @@ Resource          actions.txt
 
 *** Variables ***
 #- CONTEXT VARIABLES ---
-${_FILE_AGENT}    FL01AT03
+${_FILE_AGENT}    VVNWINDOWS01
 ${_FILE_LOGIN}    VVNSAT.LOGIN_ALL
-${_FILE_WORKING_DIR}    C:\\automic\\agents\\dev01\\runbook_test
+${_FILE_WORKING_DIR}    C:\\automic\\agents\\vvnwindows01\\
 ${_TEMPLATE_DESCRIPTOR}    /
 ${_MOCKUP_URL}    http://vvnsatara11:9969
 ${_SNAPSHOT_TYPE}    PCK.AUTOMIC_WINDOWS_SERVICE
@@ -20,41 +20,23 @@ Init AE And Package
 Use FILE01
     [Arguments]    ${snapshot}
     #Vm Revert    vvnsatfile01    ${snapshot}
-    Set Global Variable    ${_FILE_AGENT}    FL01AT03
+    Set Global Variable    ${_FILE_AGENT}    VVNWINDOWS01
     Set Global Variable    ${_FILE_LOGIN}    VVNSAT.LOGIN_ALL
-    Set Global Variable    ${_FILE_WORKING_DIR}    C:\\automic\\agents\\dev01\\runbook_test
+    Set Global Variable    ${_FILE_WORKING_DIR}    C:\\automic\\agents\\vvnwindows01\\
     Set Global Variable    ${/}    \\
-
-Use FILE02
-    [Arguments]    ${snapshot}
-    #Vm Revert    vvnsatfile02    ${snapshot}
-    Set Global Variable    ${_FILE_AGENT}    FL02AT03
-    Set Global Variable    ${_FILE_LOGIN}    VVNSAT.LOGIN_ALL
-    Set Global Variable    ${_FILE_WORKING_DIR}    /opt/automic/agents/FL02DEV1/runbook_test
-    Set Global Variable    ${/}    /
 
 Init Win File Server
     [Documentation]    Requirement
     Use FILE01    fresh
 
-Init Unix File Server
-    [Documentation]    Requirement
-    Use FILE02    fresh
-
 Init Win File Server User Permission
     [Documentation]    Requirement
     Use FILE01 User Permission    fresh
 
-Init Unix File Server User Permission
-    [Documentation]    Requirement
-    Use FILE02 User Permission    fresh
-
 Init File Server
     [Documentation]    Requirement
     Run Keyword If    '${OS}' == 'WIN'    Init Win File Server
-    Run Keyword If    '${OS}' == 'UNIX'    Init Unix File Server
 
 Init File Server User Permission
     [Documentation]    Requirement
     Run Keyword If    '${OS}' == 'WIN'    Init Win File Server User Permission
-    Run Keyword If    '${OS}' == 'UNIX'    Init Unix File Server User Permission
