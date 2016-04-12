@@ -8,8 +8,7 @@ Resource          ../../resources/keywords.txt
 ${working_dir}    ${_FILE_WORKING_DIR}\\FileCommand\\WindowsServiceManager\\ServiceManager\\windows\\x64
 
 *** Test Cases ***    SERVICE NAME       ACCOUNT    RETURN CODE    RETURN STATUS
-Service Does Not Found
-                      UC4.TestService    .\u1       1              ${ENDED_NOT_OK - aborted}
+Service Does Not Found    UC4.TestService    .\\administrator       1              ${ENDED_NOT_OK - aborted}
 
 *** Keywords ***
 Suite Setup
