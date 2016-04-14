@@ -58,7 +58,7 @@ Common testsuites execute and assert fail
 
 Init Application Workflow
     [Arguments]    ${action_name}
-    Action Create With File    ${action_name}    ${_TEMPLATE_DESCRIPTOR}
+    Action Create    ${action_name}    ${_TEMPLATE_DESCRIPTOR}
     @{config}=    Create List    ${_MOCKUP_URL}    anything    anything    ${_FILE_AGENT}    ${_FILE_LOGIN}
     Deployment Config    @{config}
     Add Common essential variable
@@ -75,7 +75,7 @@ Add Common essential variable
 
 Snapshot Suite Setup
     Init AE And Package
-    Set Global Variable    ${_TEMPLATE_DESCRIPTOR}    ${_FILE_WORKING_DIR}${/}valid.txt
+    Set Global Variable    ${_TEMPLATE_DESCRIPTOR}    <?xml version="1.0" encoding="UTF-8"?><processFlowModification application="##APPLICATION_NAME##" applicationWorkflow="##APPLICATION_WORKFLOW_NAME##"><attributes><attribute name="QUEUE" value="CLIENT_QUEUE" /><attribute name="CHILD_QUEUE" value="*OWN" /></attributes><variables><variable name="@global/username" value="##ARA_USER##" /><variable isEncrypted="true" name="@global/token" value="##ARA_PASSWD##" /><variable name="@global/CallbackURL" value="##ARA_URL##" /><variable name="@global/login" value="##LOGIN_OBJECT##" /></variables><task component="##COMPONENT_NAME##"><modification type="parallel"><generateTask alias="##ALIAS##"><variables><variable name="agent" value="##AGENT##" /><variable name="@target/system/agent" value="##AGENT##" /></variables></generateTask></modification></task></processFlowModification>
 
 Create Test Snapshot
     Init Application Workflow    ${ACTION_SNAPSHOT_CREATE}
@@ -98,7 +98,6 @@ Clean Snapshot
 Create Data Test
     Init File Server
     Download datatest    /testdata/PCK.AUTOMIC_WINDOWS_SERVICE
-    Download datatest for robot    /testdata/PCK.AUTOMIC_WINDOWS_SERVICE
 
 Download datatest
     [Arguments]    ${path}
@@ -115,13 +114,3 @@ Download datatest
     Action Set    &UC4RB_FTP_CONNECT_TIMEOUT#    5000
     Action Set    &UC4RB_FTP_TR_MODE#    BINARY
     Action Execute
-
-Download datatest for robot
-    [Arguments]    ${path}
-    ${DL_HOST}=    Set Variable    vvni01
-    ${DL_PORT}=    Set Variable    21
-    ${DL_USER}=    Set Variable    administrator
-    ${DL_PWD}=    Set Variable    S3rv3r@Aut
-    ${DL_SOURCE_FILES}=    Set Variable    ${path}
-    ${DL_TGT_FILES_DIR}=    Set Variable    ${_FILE_WORKING_DIR}
-    Ftp Download    ${DL_HOST}    ${DL_PORT}    ${DL_USER}    ${DL_PWD}    ${DL_SOURCE_FILES}    ${DL_TGT_FILES_DIR}
