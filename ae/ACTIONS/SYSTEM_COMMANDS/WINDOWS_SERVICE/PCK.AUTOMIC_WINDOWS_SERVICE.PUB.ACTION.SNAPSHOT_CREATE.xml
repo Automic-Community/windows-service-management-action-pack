@@ -321,7 +321,8 @@
 <node content="1" id="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK" name="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">
 <PRPTBOX promptset="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">
-<UC4RB_ADD_ZIPs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_ADD_ZIP#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">YES</UC4RB_ADD_ZIPs.00>
+<UC4RB_ADD_ZIPs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_ADD_ZIP#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">YES</UC4RB_ADD_ZIPs.00>
+<UC4RB_ARCHIVE_TYPEs.00 ReadFromTable="JPPV" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_ARCHIVE_TYPE#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">zip</UC4RB_ARCHIVE_TYPEs.00>
 <UC4RB_DIR_FILE_PACK_INPUTs.00 ReadFromTable="JPPV" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_PACK_INPUT#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">&amp;UC4RB_OUT_ZIP_FOLDER#</UC4RB_DIR_FILE_PACK_INPUTs.00>
 <UC4RB_DIR_FILE_PACK_NAMEs.00 ReadFromTable="JPPV" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_PACK_NAME#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.PACK">&amp;UC4RB_OUT_ZIP_FILE#</UC4RB_DIR_FILE_PACK_NAMEs.00>
 </PRPTBOX>

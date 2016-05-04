@@ -9,7 +9,7 @@ ${_FILE_AGENT}    VVNWINDOWS01
 ${_FILE_LOGIN}    VVNSAT.LOGIN_ALL
 ${_FILE_WORKING_DIR}    C:\\automic\\agents\\vvnwindows01\\
 ${_TEMPLATE_DESCRIPTOR}    /
-${_MOCKUP_URL}    http://vvnsatara11:9969
+${_MOCKUP_URL}    http://172.16.36.57:9969
 ${_SNAPSHOT_TYPE}    PCK.AUTOMIC_WINDOWS_SERVICE
 
 *** Key Words ***

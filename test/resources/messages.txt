@@ -3,7 +3,7 @@
 ${MessageStartOk}    Start tomcat ok
 ${MessageAlreadyRunning}    Tomcat already running
 ${CreateServiceSuccess}    CreateService SUCCESS
-${DeletePausedService}    The specified service has been marked for deletion.
+${DeletePausedService}    DeleteService SUCCESS
 ${SERVICE_NAME}    SERVICE_NAME
 ${TYPE}           TYPE
 ${WIN32_EXIT_CODE}    WIN32_EXIT_CODE
