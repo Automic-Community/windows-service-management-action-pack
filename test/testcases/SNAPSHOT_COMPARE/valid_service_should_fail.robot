@@ -10,7 +10,7 @@ Resource          shared_template.robot
 
 *** Test Cases ***    SERVICE NAME    GUID        RETURN STATUS      RETURN CODE
 Archive path not correct
-                      Tomcat7         abcd1234    ${ENDED_NOT_OK}    1
+                      UC4.TestService         abcd1234    ${ENDED_NOT_OK}    1
 
 *** Key Words ***
 archive_path_invalid_should_fail

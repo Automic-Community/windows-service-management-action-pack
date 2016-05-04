@@ -9,7 +9,7 @@ Resource          ../../resources/keywords.txt
 Resource          shared_template.robot
 
 *** Test Cases ***    SERVICE NAME    RETURN STATUS    RETURN CODE
-Normal                Tomcat7         ${ENDED_OK}      0
+Normal                UC4.TestService         ${ENDED_OK}      0
 
 *** Key Words ***
 archive_path_valid_should_success

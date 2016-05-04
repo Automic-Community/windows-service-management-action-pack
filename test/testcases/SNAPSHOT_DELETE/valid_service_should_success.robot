@@ -9,7 +9,7 @@ Resource          ../../resources/keywords.txt
 Resource          shared_template.robot
 
 *** Test Cases ***    SERVICE NAME    RETURN STATUS    RETURN CODE
-Existed Service       Tomcat7         ${ENDED_OK}      0
+Existed Service       UC4.TestService         ${ENDED_OK}      0
 
 *** Key Words ***
 valid_should_success

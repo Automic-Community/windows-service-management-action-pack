@@ -8,5 +8,5 @@ Test Template     Test Service
 Resource          ../../resources/keywords.txt
 Resource          shared_template.robot
 
-*** Test Cases ***    SERVICE NAME    RETURN STATUS    RETURN CODE
-Existed Service       Tomcat7         ${ENDED_OK}      0
+*** Test Cases ***    SERVICE NAME       RETURN STATUS    RETURN CODE
+Existed Service       UC4.TestService    ${ENDED_OK}      0
