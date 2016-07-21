@@ -142,7 +142,6 @@ if %errorlevel% NEQ 0 (
 ! Wait 10 seconds
 ping 127.0.0.1 -n 10 -w 1000 > nul
 
-
 ! Check the status of the service
 %SYSTEMROOT%\system32\sc.exe query "&UC4RB_SCM_SERVICE_NAME#" | find /I "STATE" | find "RUNNING"
 if %errorlevel% NEQ 0 (

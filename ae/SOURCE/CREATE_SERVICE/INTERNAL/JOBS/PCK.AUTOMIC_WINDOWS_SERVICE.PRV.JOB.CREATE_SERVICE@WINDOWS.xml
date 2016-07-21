@@ -144,7 +144,6 @@ if %errorlevel% EQU 0 (
 %SYSTEMROOT%\system32\sc.exe create "&UC4RB_SCM_SERVICE_NAME#" binPath= "&UC4RB_SCM_SERVICE_PATH_CLEANED#" displayName= "&UC4RB_SCM_SERVICE_DISPLAY_NAME#" type= "&UC4RB_SCM_SERVICE_TYPE#"
 if %errorlevel% NEQ 0 exit /b 1
 
-
 ]]></MSCRI>
 </SCRIPT>
 <OUTPUTSCAN state="1">

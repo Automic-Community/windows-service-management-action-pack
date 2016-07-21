@@ -126,7 +126,6 @@
 :   SET &UC4RB_SCM_SERVICE_PATH_CLEANED#=STR_CUT(&UC4RB_SCM_SERVICE_PATH#, 1, &path_length#)
 : ENDIF
 
-
 ! Update service bin path
 
 ! Check if service exists

@@ -124,7 +124,6 @@
 :   EXIT 1
 : ENDIF
 
-
 ! Check if service exists
 %SYSTEMROOT%\system32\sc.exe query "&UC4RB_SCM_SERVICE_NAME#" | findstr "&UC4RB_SCM_SERVICE_NAME#"
 if %errorlevel% NEQ 0 exit /b %errorlevel%
