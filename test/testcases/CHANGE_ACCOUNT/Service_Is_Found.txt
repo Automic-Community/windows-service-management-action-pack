@@ -7,10 +7,12 @@ Resource          ../../resources/keywords.txt
 *** Variables ***
 ${working_dir}    ${_FILE_WORKING_DIR}\\FileCommand\\WindowsServiceManager\\ServiceManager\\windows\\x64
 
-*** Test Cases ***    SERVICE NAME       SERVICE PATH    SERVICE TYPE    DISPLAYED NAME     ACCOUNT          RETURN CODE    RETURN STATUS
-Change To Valid Account    UC4.TestService    UCYBSMgr.exe    own             UC4.TestService    .\\administrator            0              ${ENDED_OK - ended normally}
+*** Test Cases ***    SERVICE NAME       SERVICE PATH    SERVICE TYPE    DISPLAYED NAME     ACCOUNT             RETURN CODE    RETURN STATUS
+Change To Valid Account
+                      UC4.TestService    UCYBSMgr.exe    own             UC4.TestService    .\\administrator    0              ${ENDED_OK - ended normally}
 
-Change To Invalid Account    UC4.TestService    UCYBSMgr.exe    own             UC4.TestService    NONEXIST_USER    1              ${ENDED_NOT_OK - aborted}
+Change To Invalid Account
+                      UC4.TestService    UCYBSMgr.exe    own             UC4.TestService    NONEXIST_USER       1              ${ENDED_NOT_OK - aborted}
 
 *** Keywords ***
 Suite Setup

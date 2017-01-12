@@ -9,6 +9,7 @@ ${working_dir}    ${_FILE_WORKING_DIR}${/}FileCommand${/}TestWindowsService
 
 *** Test Cases ***    SERVICE NAME                                                                        SERVICE PATH      SERVICE TYPE    DISPLAY NAME                     RETURN CODE    RETURN STATUS                   MESSAGE
 Service Is In Paused State
+                      [Tags]                                                                              SMOKE_TEST
                       UC4.TestWindowsService.Paused                                                       DhmService.exe    own             UC4.TestWindowsService.Paused    0              ${ENDED_OK - ended normally}    ${STATE_4_RUNNING}
                       #Cannot stop the service that is in Paused state so one of step of TCs is failed
 
