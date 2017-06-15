@@ -19,7 +19,7 @@ Init AE And Package
 
 Use FILE01
     [Arguments]    ${snapshot}
-    #Vm Revert    vvnsatfile01    ${snapshot}
+   
     Set Global Variable    ${_FILE_AGENT}    VVNWINDOWS01
     Set Global Variable    ${_FILE_LOGIN}    VVNSAT.LOGIN_ALL
     Set Global Variable    ${_FILE_WORKING_DIR}    C:\\automic\\testcases\\PCK.AUTOMIC_WINDOWS_SERVICE\\
