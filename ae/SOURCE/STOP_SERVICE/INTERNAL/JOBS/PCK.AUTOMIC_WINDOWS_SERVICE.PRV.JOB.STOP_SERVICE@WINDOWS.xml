@@ -119,7 +119,7 @@
 :INCLUDE PCK.ITPA_SHARED.PRV.INCLUDE.CHECK_CMDLINE_CMD@WINDOWS
 ! Stop a given service
 ! Check service exists first
-%SYSTEMROOT%\system32\sc.exe query "&UC4RB_SCM_SERVICE_NAME#"  | findstr &UC4RB_SCM_SERVICE_NAME#
+%SYSTEMROOT%\system32\sc.exe query "&UC4RB_SCM_SERVICE_NAME#"  | findstr "&UC4RB_SCM_SERVICE_NAME#"
 if %errorlevel% NEQ 0 (
  echo "Unable to locate service &UC4RB_SCM_SERVICE_NAME#"
  exit /b 1
