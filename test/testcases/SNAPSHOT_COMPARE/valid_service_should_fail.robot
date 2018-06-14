@@ -8,9 +8,9 @@ Test Template     archive_path_invalid_should_fail
 Resource          ../../resources/keywords.txt
 Resource          shared_template.robot
 
-*** Test Cases ***    SERVICE NAME       GUID        RETURN STATUS       RETURN CODE
+*** Test Cases ***    SERVICE NAME          GUID        RETURN STATUS                RETURN CODE
 Archive path not correct
-                      UC4.TestService    abcd1234    ${ENDED_BLOCKED}    1
+                      UC4.TestService.01    abcd1234    ${ENDED_NOT_OK - aborted}    1
 
 *** Key Words ***
 archive_path_invalid_should_fail
