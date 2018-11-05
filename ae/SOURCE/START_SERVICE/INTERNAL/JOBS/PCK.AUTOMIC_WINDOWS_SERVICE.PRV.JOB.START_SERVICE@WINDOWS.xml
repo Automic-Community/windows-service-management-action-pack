@@ -140,14 +140,19 @@ if %errorlevel% NEQ 0 (
 )
 
 ! Wait maximum 50 seconds
-for /l %%x in (1,1,5) do (ping 127.0.0.1 -n 10 -w 1000 > nul)
-
+for /l %%x in (1,1,5) do (
+ ping 127.0.0.1 -n 10 -w 1000 > nul
 ! Check the status of the service
-%SYSTEMROOT%\system32\sc.exe query "&UC4RB_SCM_SERVICE_NAME#" | find /I "STATE" | find "RUNNING"
+ %SYSTEMROOT%\system32\sc.exe query "&UC4RB_SCM_SERVICE_NAME#" | find /I "STATE" | find "RUNNING"
+ if %errorlevel% EQU 0 GOTO END
+)
+
 if %errorlevel% NEQ 0 (
   echo "Unable to confirm that service &UC4RB_SCM_SERVICE_NAME# is in a RUNNING state"
   exit /b 1
 )
+
+ :END
 ]]></MSCRI>
 </SCRIPT>
 <OUTPUTSCAN state="1">
