@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<JOBI name="PCK.AUTOMIC_WINDOWS_SERVICE.INC.OVERVIEW_TRANSFORM_DATA">
+<HEADER state="1">
+<Title/>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[$scFiles=Get-ChildItem $tempPath | Where-Object {$_.PSIsContainer -eq $false} | Select-Object name
+
+#first process output from sc commands and build a hash array
+$res=@{}
+$keys_to_process = "ERROR_CONTROL","START_TYPE","STATE","TYPE"
+foreach ($fileName in $scFiles) {
+
+ $fileName=join-path $tempPath $fileName.name
+ $file=Get-Content $fileName
+ foreach ($i in $file) {
+
+  $i=$i -replace "^\s+",""
+  $j=$i.split(":")
+
+  $len=$j.length
+  if ($len -gt 1 ) {
+    if ($j[0]) {
+      $key=$j[0].Trim()
+      if ( $key -ceq "SERVICE_START_NAME" ) {
+        $key = $key+" (Service run as user)"
+      }
+    }
+    if ($len -gt 2) {
+      $val=[System.string]::join(":",$j[1..$j.length]).Trim()
+    } else {
+      $val=$j[1].Trim()
+    }
+    if ( $res.Contains($key) -and $key -ne "SERVICE_NAME" ){
+      $res[$key]=$res[$key]+", "+$val
+    } else {
+      $res[$key]=$val
+    }
+    if ( $keys_to_process -match $key ) {
+      $res[$key]=$res[$key] -replace " ","-" -replace ",-",", " -replace "---", "-" -replace "--","-"
+    }
+    write-output "key:$key"
+    write-output "val:$val"
+  }
+ }
+}
+write-output "--------------------------------------------"
+write-output $res
+
+$xmlDoc='<?xml version="1.0" encoding="UTF-8"?>
+<snapshot date="' + $currentDateTime + '" guid="'+$guid+'" serviceName="'+$serviceName+'" type="svc" >'
+$xmlDoc=$xmlDoc+'<service id="'+$serviceName+'">'
+foreach($k in $res.Keys) {
+ $value=$res[$k]
+ $value=$value -replace '"',"&quot;"
+ write-output "value:$value"
+ $xmlDoc=$xmlDoc+'<property id="'+$k+'" name="'+$k+'" value="'+$value+'"/>'
+}
+$xmlDoc=$xmlDoc+'</service>'
+$xmlDoc=$xmlDoc+"</snapshot>"
+
+$doc=[xml]$xmlDoc]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBI>
+</uc-export>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<JOBS_WINDOWS AttrType="WINDOWS" name="PCK.AUTOMIC_WINDOWS_SERVICE.PRV.JOB.CREATE_COMPARE_REPORT@WINDOWS">
+<XHEADER state="1">
+<Title/>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<Active>1</Active>
+<OH_SubType/>
+<CustomAttributes KeyListID="0" dataRequestID="0"/>
+</XHEADER>
+<OUTPUTREG state="1">
+<FileReg/>
+</OUTPUTREG>
+<SYNCREF state="1">
+<Syncs/>
+</SYNCREF>
+<ATTR_JOBS state="1">
+<Queue>CLIENT_QUEUE</Queue>
+<StartType/>
+<HostDst>|&lt;WIN&gt;|HOST</HostDst>
+<HostATTR_Type>WINDOWS</HostATTR_Type>
+<CodeName/>
+<Login/>
+<IntAccount/>
+<ExtRepDef>1</ExtRepDef>
+<ExtRepAll>0</ExtRepAll>
+<ExtRepNone>0</ExtRepNone>
+<AutoDeactNo>0</AutoDeactNo>
+<AutoDeact1ErrorFree>0</AutoDeact1ErrorFree>
+<AutoDeactErrorFree>1</AutoDeactErrorFree>
+<DeactWhen>ANY_OK</DeactWhen>
+<DeactDelay>0</DeactDelay>
+<AutoDeactAlways>0</AutoDeactAlways>
+<AttDialog>0</AttDialog>
+<ActAtRun>1</ActAtRun>
+<Consumption>0</Consumption>
+<UC4Priority>0</UC4Priority>
+<MaxParallel2>0</MaxParallel2>
+<MpElse1>1</MpElse1>
+<MpElse2>0</MpElse2>
+<TZ/>
+</ATTR_JOBS>
+<ATTR_WINDOWS state="1">
+<OutputDb>1</OutputDb>
+<OutputDbErr>0</OutputDbErr>
+<OutputFile>0</OutputFile>
+<IsGenerated>0</IsGenerated>
+<BAT>0</BAT>
+<COM>0</COM>
+<WinBatch>1</WinBatch>
+<Standard>1</Standard>
+<Minimized>0</Minimized>
+<Maximized>0</Maximized>
+<JObjDefault>1</JObjDefault>
+<JObjYes>0</JObjYes>
+<JObjNo>0</JObjNo>
+<WorkingDirectory>c:\</WorkingDirectory>
+<Command/>
+<LogOn>0</LogOn>
+<ShowJob>0</ShowJob>
+</ATTR_WINDOWS>
+<RUNTIME state="1">
+<MaxRetCode>0</MaxRetCode>
+<MrcExecute/>
+<MrcElseE>0</MrcElseE>
+<FcstStatus>0| |</FcstStatus>
+
+<ErtMethodDef>1</ErtMethodDef>
+<ErtMethodFix>0</ErtMethodFix>
+<ErtFix>0</ErtFix>
+<ErtDynMethod>2|Average</ErtDynMethod>
+<ErtMethodDyn>0</ErtMethodDyn>
+<ErtCnt>0</ErtCnt>
+<ErtCorr>0</ErtCorr>
+<ErtIgn>0</ErtIgn>
+<ErtIgnFlg>0</ErtIgnFlg>
+<ErtMinCnt>0</ErtMinCnt>
+<MrtMethodNone>1</MrtMethodNone>
+<MrtMethodFix>0</MrtMethodFix>
+<MrtFix>0</MrtFix>
+<MrtMethodErt>0</MrtMethodErt>
+<MrtErt>0</MrtErt>
+<MrtMethodDate>0</MrtMethodDate>
+<MrtDays>0</MrtDays>
+<MrtTime>00:00</MrtTime>
+<MrtTZ/>
+<SrtMethodNone>1</SrtMethodNone>
+<SrtMethodFix>0</SrtMethodFix>
+<SrtFix>0</SrtFix>
+<SrtMethodErt>0</SrtMethodErt>
+<SrtErt>0</SrtErt>
+<MrtCancel>0</MrtCancel>
+<MrtExecute>0</MrtExecute>
+<MrtExecuteObj/>
+</RUNTIME>
+<DYNVALUES state="1">
+<dyntree>
+<node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
+<VALUE state="1">
+<Values/>
+<Mode>0</Mode>
+</VALUE>
+</node>
+</dyntree>
+</DYNVALUES>
+<ROLLBACK state="1">
+<RollbackFlag>0</RollbackFlag>
+<CBackupObj/>
+<CRollbackObj/>
+<FBackupPath/>
+<FDeleteBefore>0</FDeleteBefore>
+<FInclSubDirs>0</FInclSubDirs>
+</ROLLBACK>
+<PRE_SCRIPT mode="1" replacementmode="1" state="1">
+<PSCRI><![CDATA[:INCLUDE PCK.ITPA_SHARED.PRV.INCLUDE.PREPARE_JOB]]></PSCRI>
+</PRE_SCRIPT>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[:INCLUDE PCK.ITPA_SHARED.PRV.INCLUDE.CHANGE_DIRECTORY_TO_AGENT_BIN
+:INCLUDE PCK.ITPA_SHARED.PRV.INCLUDE.CHECK_POWERSHELL_CMD@WINDOWS
+
+$agentpath=get-location
+
+$snapshotFolder=join-path $agentpath "snapshot\&UC4RB_SNAPSHOT_GUID#"
+$tempPath=join-path $snapshotFolder "temp"
+$reportFile="$snapshotFolder\compare_&$ACTIVATOR_RUNID#.xml"
+$overviewReportFile="$snapshotFolder\OverviewSnapBOM.xml"
+
+$guid="&UC4RB_SNAPSHOT_GUID#"
+### read registry key path from Overview report
+$overviewReportDoc=[XML](Get-Content $overviewReportFile)
+$serviceName="&UC4RB_SVC_SERVICE_NAME#"
+
+$currentDateTime=get-date -format "d/MM/%y HH:%m:%s"
+###
+# First create an overview report again
+###
+:INC PCK.AUTOMIC_WINDOWS_SERVICE.PRV.INC.TRANSFORM_DATA
+$scFiles=Get-ChildItem $tempPath | Where-Object {$_.PSIsContainer -eq $false} | Select-Object name
+
+#first process output from sc commands and build a hash array
+$res=@{}
+$keys_to_process = "ERROR_CONTROL","START_TYPE","STATE","TYPE"
+foreach ($fileName in $scFiles) {
+
+ $fileName=join-path $tempPath $fileName.name
+ $file=Get-Content $fileName
+ foreach ($i in $file) {
+
+  $i=$i -replace "^\s+",""
+  $j=$i.split(":")
+
+  $len=$j.length
+  if ($len -gt 1 ) {
+    if ($j[0]) {
+      $key=$j[0].Trim()
+      if ( $key -ceq "SERVICE_START_NAME" ) {
+        $key = $key+" (Service run as user)"
+      }
+    }
+    if ($len -gt 2) {
+      $val=[System.string]::join(":",$j[1..$j.length]).Trim()
+    } else {
+      $val=$j[1].Trim()
+    }
+    if ( $res.Contains($key) -and $key -ne "SERVICE_NAME" ){
+      $res[$key]=$res[$key]+", "+$val
+    } else {
+      $res[$key]=$val
+    }
+    if ( $keys_to_process -match $key ) {
+      $res[$key]=$res[$key] -replace " ","-" -replace ",-",", " -replace "---", "-" -replace "--","-"
+    }
+    write-output "key:$key"
+    write-output "val:$val"
+  }
+ }
+}
+write-output "--------------------------------------------"
+write-output $res
+
+$xmlDoc='<?xml version="1.0" encoding="UTF-8"?>
+<snapshot date="' + $currentDateTime + '" guid="'+$guid+'" serviceName="'+$serviceName+'" type="svc" >'
+$xmlDoc=$xmlDoc+'<service>'
+foreach($k in $res.Keys) {
+ $value=$res[$k]
+ $value=$value -replace '"',"&quot;"
+ write-output "value:$value"
+ $xmlDoc=$xmlDoc+'<property name="'+$k+'" value="'+$value+'"/>'
+}
+$xmlDoc=$xmlDoc+'</service>'
+$xmlDoc=$xmlDoc+"</snapshot>"
+
+$doc=[xml]$xmlDoc
+
+###
+#Compare original overview report with a new one
+###
+
+Function Strings_Symmetric_Diff($a,$b) {
+  $newA=[System.Collections.ArrayList] $a.replace(", ",",").split(",")
+  $newB=[System.Collections.ArrayList] $b.replace(", ",",").split(",")
+  $tempA=New-Object System.Collections.ArrayList
+  foreach ( $elem in $newA ) {
+    if ( $newB.Contains($elem) ) {
+      [void]$tempA.add($elem)
+    }
+  }
+  foreach ( $elem in $tempA ) {
+    $newA.Remove($elem)
+    $newB.Remove($elem)
+  }
+  $retA=$newA -join ", "
+  $retB=$newB -join ", "
+  return $retA, $retB
+}
+
+$compRepXml='<?xml version="1.0" encoding="UTF-8"?>
+<snapshot date="' + $currentDateTime + '" guid="'+$guid+'" serviceName="'+$serviceName+'" type="svc" >'
+
+$compRepXml=$compRepXml+'<service>'
+$properties=$doc.snapshot.service.property
+
+#check if property was added
+foreach($i in $properties) {
+  $name=$i|select -expand name
+  $value=$i|select -expand value
+  $xpath='/snapshot/service/property[@name="'+$name+'"]'
+  $res=select-xml $xpath $overviewReportDoc
+  if(! $res) {
+    write-output "===snapshot is inconsistent==="
+    $compRepXml=$compRepXml+"<property name='"+$name+"' value='"+$value+"' state='added'/>"
+  } else {
+     # here we need to check if value has changed.
+     $value2=$res.Node|select -expand value
+     $compRepXml=$compRepXml+"<property name='"+$name+"'"
+     if ( $value -cne $value2 ) {
+       write-output "===snapshot is inconsistent==="
+       if ( $name -eq "PRIVILEGES" -or $name -eq "DEPENDENCIES" ) {
+         $retBindings=Strings_Symmetric_Diff $value $value2
+         $value_nv=$retBindings[0]
+         $value_nv=$value_nv -replace '"',"&quot;"
+         $value_ov=$retBindings[1]
+         $value_ov=$value_ov -replace '"',"&quot;"
+         $compRepXml=$compRepXml+' value_ov="'+$value_ov+'" value_nv="'+$value_nv+'" state="changed" />'
+       } else {
+         $value=$value -replace '"',"&quot;"
+         $value2=$value2 -replace '"',"&quot;"
+         $compRepXml=$compRepXml+' value_ov="'+$value2+'" value_nv="'+$value+'" state="changed" />'
+       }
+     } else {
+       $compRepXml=$compRepXml+" value='"+$value+"' state='equal'/>"
+     }
+  }
+}
+
+#checking if a property was deleted
+
+$properties=$overviewReportDoc.snapshot.service.property
+if ( $properties ) {
+  foreach($i in $properties) {
+    $name=$i|select -expand name
+    $value=$i|select -expand value
+    $xpath='/snapshot/service/property[@name="'+$name+'"]'
+    $res=select-xml $xpath $doc
+    if(! $res) {
+      write-output "===snapshot is inconsistent==="
+      $compRepXml=$compRepXml+"<property name='"+$name+"' value='"+$value+"' state='deleted'/>"
+    }
+  }
+}
+
+$compRepXml=$compRepXml+"</service>"
+$compRepXml=$compRepXml+"</snapshot>"
+$compRepDoc=[xml]$compRepXml
+$Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($False)
+$w = New-Object System.Xml.XmlTextWriter($reportFile, $Utf8NoBomEncoding)
+$compRepDoc.Save($w)
+$w.Close()
+
+Remove-Item $tempPath -recurse
+
+:INCLUDE PCK.ITPA_SHARED.PRV.INCLUDE.CHECK_POWERSHELL_CMD@WINDOWS
+:PSET &UC4RB_OUT_XSLT_FILE#="CompareSvcSnapshot.xslt"
+:PSET &UC4RB_OUT_REPORT_FILE#="&UC4RB_AGENT_WORKING_DIR#\snapshot\&UC4RB_SNAPSHOT_GUID#\compare_&$ACTIVATOR_RUNID#.xml"
+
+]]></MSCRI>
+</SCRIPT>
+<OUTPUTSCAN state="1">
+<Inherit>N</Inherit>
+<filterobjects/>
+<HostFsc/>
+<LoginFsc/>
+</OUTPUTSCAN>
+<POST_SCRIPT mode="1" replacementmode="1" state="1">
+<OSCRI><![CDATA[:PSET &UC4RB_CONTENT_STATUS# = "Consistent"
+:  SET &hnd# = PREP_PROCESS_REPORT("JOBS",,"REP")
+:  PROCESS &hnd#
+:    SET &LINE# = GET_PROCESS_LINE(&hnd#)
+:     IF &LINE# = "===snapshot is inconsistent==="
+:       PSET &UC4RB_CONTENT_STATUS#="Inconsistent"
+:       TERM_PROCESS
+:     ENDIF
+:  ENDPROCESS]]></OSCRI>
+</POST_SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBS_WINDOWS>
+</uc-export>
